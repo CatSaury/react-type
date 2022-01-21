@@ -3,7 +3,8 @@ import logo from "./logo.svg";
 import styles from "./App.module.css";
 import Robot from "./components/Robot";
 
-import ShoppingCart from './components/ShoppingCart'
+import ShoppingCart from "./components/ShoppingCart";
+import RobotDisCount from "./components/RobotDisCount";
 
 interface Props {}
 
@@ -31,8 +32,8 @@ const App: React.FC<Props> = (props) => {
         );
         const data = await responses.json();
         setRobotGallery(data);
-      } catch (error:any) {
-        setError(error.message)
+      } catch (error: any) {
+        setError(error.message);
       }
       setLoading(false);
     };
@@ -55,20 +56,31 @@ const App: React.FC<Props> = (props) => {
       </button>
       <span>count: {count}</span>
       <ShoppingCart />
-        {
-          !loading ? (
-            <div className={styles.robotList}>
-              {robotGallery.map(
-                (item: { id: number; name: string; email: string }) => (
-                  <Robot key={item.id} id={item.id} name={item.name} email={item.email} />
-                )
-              )}
-            </div>
-          ) : (
-            <div>正在加载中</div>
-          )
-        }
-      
+      <div>错误信息：{ error } </div>
+      {!loading ? (
+        <div className={styles.robotList}>
+          {robotGallery.map(
+            (item: { id: number; name: string; email: string }) => 
+              item.id % 2 !== 0 ? (
+                <Robot
+                  key={item.id}
+                  id={item.id}
+                  name={item.name}
+                  email={item.email}
+                />
+              ) : (
+                <RobotDisCount
+                  key={item.id}
+                  id={item.id}
+                  name={item.name}
+                  email={item.email}
+                ></RobotDisCount>
+              )
+          )}
+        </div>
+      ) : (
+        <div>正在加载中</div>
+      )}
     </div>
   );
 };
