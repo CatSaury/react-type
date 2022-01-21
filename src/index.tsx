@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+
+interface AppStateValue {
+  username: string,
+  shoppingCar: { item: { id: number, name: string }[] }
+}
+
+const defaultContextValue: AppStateValue = {
+  username: '',
+  shoppingCar: { item: [] }
+}
+
 
 ReactDOM.render(
   <React.StrictMode>
