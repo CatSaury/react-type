@@ -45,7 +45,7 @@ const App: React.FC<Props> = (props) => {
     <div className={styles.app}>
       <div className={styles.appHeader}>
         <img src={logo} className={styles.appLogo} alt="logo" />
-        <h1>罗伯特机器人炫酷吊炸天online购物平台的名字要长</h1>
+        <h1>机器人购物平台</h1>
       </div>
       <button
         onClick={() => {

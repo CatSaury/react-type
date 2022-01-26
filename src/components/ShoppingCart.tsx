@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./ShoppingCart.module.css";
+import { store } from '../redux/store'
 import { AppContext } from "../AppState";
 
 interface Props {}
@@ -14,6 +15,17 @@ class ShoppingCart extends React.Component<Props, State> {
     this.state = {
       isOpen: false,
     };
+  }
+
+  componentDidMount() {
+
+    // store.getState()
+    console.log(store.getState())
+
+    store.subscribe(()=>{
+      console.log(store.getState())
+      
+    })
   }
 
   handleClick = (e: React.MouseEvent) => {
