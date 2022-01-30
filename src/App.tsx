@@ -1,87 +1,24 @@
-import React, { useState, useEffect } from "react";
-import logo from "./logo.svg";
-import styles from "./App.module.css";
-import Robot from "./components/Robot";
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Home, Login, NotFound, Dashboard } from "./pages/index";
+import './App.css'
 
-import ShoppingCart from "./components/ShoppingCart";
-import RobotDisCount from "./components/RobotDisCount";
 
 interface Props {}
 
-interface State {}
-
-const App: React.FC<Props> = (props) => {
-  // 替代的是 this.state = { count: 0 }
-  const [count, setCount] = useState<number>(0);
-  const [robotGallery, setRobotGallery] = useState<any>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>("");
-
-  // 监控cont值变化，调用的钩子函数
-  useEffect(() => {
-    document.title = `点击${count}次`;
-  }, [count]);
-
-  // 组件初始化钩子函数 跟 componentDidMount 同样作用
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const responses = await fetch(
-          "https://jsonplaceholder.typicode.com/users"
-        );
-        const data = await responses.json();
-        setRobotGallery(data);
-      } catch (error: any) {
-        setError(error.message);
-      }
-      setLoading(false);
-    };
-
-    fetchData();
-  }, []);
-
+const App: React.FC<Props> = () => {
   return (
-    <div className={styles.app}>
-      <div className={styles.appHeader}>
-        <img src={logo} className={styles.appLogo} alt="logo" />
-        <h1>机器人购物平台</h1>
-      </div>
-      <button
-        onClick={() => {
-          setCount(count + 1);
-        }}
-      >
-        Click
-      </button>
-      <span>count: {count}</span>
-      <ShoppingCart />
-      <div>错误信息：{ error } </div>
-      {!loading ? (
-        <div className={styles.robotList}>
-          {robotGallery.map(
-            (item: { id: number; name: string; email: string }) => 
-              item.id % 2 !== 0 ? (
-                <Robot
-                  key={item.id}
-                  id={item.id}
-                  name={item.name}
-                  email={item.email}
-                />
-              ) : (
-                <RobotDisCount
-                  key={item.id}
-                  id={item.id}
-                  name={item.name}
-                  email={item.email}
-                ></RobotDisCount>
-              )
-          )}
-        </div>
-      ) : (
-        <div>正在加载中</div>
-      )}
-    </div>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />}>
+            <Route index element={<Dashboard />}></Route>
+          </Route>
+          <Route path="login" element={<Login />}></Route>
+          <Route path="*" element={<NotFound />}></Route>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 };
 

@@ -1,0 +1,19 @@
+.footer {
+  height: 124px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.footer a {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+
+.footer a img {
+  width: 14px;
+  height: 14px;
+  margin: 0 20px;
+}

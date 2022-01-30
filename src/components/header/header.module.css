@@ -1,0 +1,26 @@
+.header {
+  width: 100%;
+  height: 48px;
+  background: #001529;
+  display: flex;
+}
+.log {
+  width: 208px;
+  height: 48px;
+  background-color: #001529;
+}
+.log a {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+.log a img {
+  width: 28px;
+  height: 28px;
+}
+.log a h1 {
+  margin-left: 12px;
+  color: #fff;
+}
